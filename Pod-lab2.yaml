@@ -1,0 +1,14 @@
+# Create a Pod named env-pod that runs a busybox container 
+# and sets an environment variable MY_ENV with the value HelloWorld.
+# Verify the environment variable inside the Pod.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-pod
+spec:
+  containers:
+  - name: env-container
+    image: busybox
+    env: 
+    - name: MY_ENV
+      value: HelloWorld
