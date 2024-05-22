@@ -1,0 +1,12 @@
+# Create a Pod running the nginx container. 
+# Name the Pod nginx-pod.Verify the Pod is running using kubectl.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    
