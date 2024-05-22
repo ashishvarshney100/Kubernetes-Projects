@@ -1,0 +1,29 @@
+# Create a ConfigMap named app-config with a key app.properties 
+# and value app.name=MyApp.
+# Create a Pod named configmap-pod that mounts this ConfigMap as a volume.
+
+# config-file.yaml
+apiVersion: v1
+kind: ConfigMap
+data:
+  app.properties: |
+    app.name=MyApp
+metadata:
+  name: app-config
+
+# config-pod-file.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-pod
+spec:
+  containers:
+  - name: container1
+    image: nginx
+    volumeMounts:
+    - name: config-vol
+      mountPath: /config
+  volumes:
+  - name: config-vol
+    configMap:
+      name: app-config
