@@ -1,0 +1,26 @@
+# Create a Pod named health-pod that runs an nginx container with the following probes:
+# Liveness probe that checks /healthz endpoint every 10 seconds.
+# Readiness probe that checks /ready endpoint every 5 seconds.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: health-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 80
+      initialDelaySeconds: 10
+      periodSeconds: 10
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 5
