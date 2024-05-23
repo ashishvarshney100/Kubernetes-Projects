@@ -1,0 +1,17 @@
+# Create a Pod named init-pod with an Init Container that runs a busybox command to 
+# print "Initializing...". After the Init Container completes, run an nginx container.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-pod
+spec:
+  initContainers:
+  - name: busybox
+    image: busybox
+    command: ["sh", "-c", "echo initializing... ; sleep 5 "]
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
