@@ -1,0 +1,47 @@
+# Create two Pods, web-pod and db-pod, with labels app=web and app=db respectively. 
+# Configure Pod affinity so that web-pod prefers to be scheduled on the same 
+# node as db-pod.
+
+# web-pod-file
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-pod
+  labels:
+    app: web
+spec:
+  affinity:
+    podAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - db
+          topologyKey: "kubernetes.io/hostname"
+  containers:
+  - name: web
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+
+###############################
+
+# db-pod-file
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db-pod
+  labels:
+    app: db
+spec:
+  containers:
+  - name: db
+    image: postgres:latest
+    ports:
+    - containerPort: 5432
