@@ -1,0 +1,17 @@
+Debugging a Failing Pod:
+============================
+Create a Pod named failing-pod that runs a busybox container with a command that exits with an error (e.g., false).
+Use kubectl commands (kubectl logs, kubectl describe) to troubleshoot and identify the issue.
+Connecting to a Running Pod:
+
+Create a Pod named connect-pod that runs a busybox container. Use kubectl exec to run commands inside the container.
+Pod with Volume Mounts:
+
+Create a Pod named volume-pod that mounts a PersistentVolume and writes some data to the volume. Verify the data persists.
+Monitoring and Observability
+Pod Logging:
+
+Create a Pod named logging-pod that runs a nginx container. Use kubectl logs to stream logs from the Pod.
+Using Prometheus to Monitor Pods:
+
+Create a Pod named monitor-pod that runs an application exposing metrics on port 8080. Configure Prometheus to scrape these metrics.
