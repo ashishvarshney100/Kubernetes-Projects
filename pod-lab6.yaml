@@ -1,0 +1,18 @@
+# Create a Pod named resource-pod that runs a nginx container. Set a resource request 
+# of 100m CPU and 200Mi memory,and a limit of 200m CPU and 400Mi memory.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    resources:
+      requests:
+        cpu: 100m
+        memory: 200Mi
+      limits:
+        cpu: 200m
+        memory: 400Mi
