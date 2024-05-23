@@ -1,0 +1,38 @@
+# Create a Secret named db-secret with keys username and password.
+# Create a Pod named secret-pod that uses this Secret to set environment 
+# variables for a container.
+
+#secret-file.yaml
+
+apiVersion: v1
+kind: Secret
+type: Opaque
+data:
+  username: YWRtaW4K
+  password: UGFzc3dvcmQxMjNACg==
+metadata:
+  name: db-secret
+
+# ================
+#pod-file.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-pod
+spec: 
+  containers: 
+  - name: secret-container
+    image: nginx
+    command: ["sh", "-c", "echo Username: $DB_USERNAME; echo Password: $DB_PASSWORD; sleep 3600"]
+    env: 
+    - name: DB_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: db-secret
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: db-secret
